@@ -1,15 +1,15 @@
 require('optparse')
 require('pathname')
 
-module VagrantTeraTerm
+module VagrantRLogin
   class Command < Vagrant.plugin(2, :command)
     def self.synopsis
-      "connects to machine via SSH using TeraTerm"
+      "connects to machine via SSH using RLogin"
     end
 
     def execute
       opts = OptionParser.new do |opts|
-        opts.banner = "Usage: vagrant teraterm [vm-name...]"
+        opts.banner = "Usage: vagrant rlogin [vm-name...]"
 
         opts.separator ""
       end
@@ -18,7 +18,7 @@ module VagrantTeraTerm
       return -1 if !argv
 
       with_target_vms(argv, single_target: true) do |vm|
-        @config = vm.config.teraterm
+        @config = vm.config.rlogin
 
         ssh_info = vm.ssh_info
         @logger.debug("ssh_info is #{ssh_info}")
@@ -74,13 +74,13 @@ module VagrantTeraTerm
       else
         # search in PATH
         ENV['PATH'].split(File::PATH_SEPARATOR).each do |p|
-          _p = Pathname(p) + 'ttermpro.exe'
+          _p = Pathname(p) + 'RLogin.exe'
           return _p.to_s if _p.executable?
         end
 
         # Program Files
-        ['C:\Program Files (x86)\teraterm\ttermpro.exe',
-         'C:\Program Files\teraterm\ttermpro.exe'].each do |p|
+        ['C:\Program Files (x86)\RLogin\RLogin.exe',
+         'C:\Program Files\RLogin\RLogin.exe'].each do |p|
            return p if File.executable?(p)
         end
       end

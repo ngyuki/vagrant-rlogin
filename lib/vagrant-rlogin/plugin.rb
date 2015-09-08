@@ -1,18 +1,18 @@
 require "vagrant"
 
-module VagrantTeraTerm
+module VagrantRLogin
   class Plugin < Vagrant.plugin("2")
-    name "TeraTerm Plugin"
+    name "RLogin Plugin"
     description <<-DESC
-    This plugin enables to ssh into vm using TeraTerm.
+    This plugin enables to ssh into vm using RLogin.
     DESC
 
-    command "teraterm" do
+    command "rlogin" do
       require_relative "command"
       Command
     end
 
-    config "teraterm" do
+    config "rlogin" do
       require_relative "config"
       Config
     end

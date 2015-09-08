@@ -7,5 +7,5 @@ group :development do
 end
 
 group :plugins do
-  gem "vagrant-teraterm", path: "."
+  gem "vagrant-rlogin", path: "."
 end

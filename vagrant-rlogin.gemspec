@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'vagrant-teraterm/version'
+require 'vagrant-rlogin/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "vagrant-teraterm"
-  spec.version       = VagrantTeraTerm::VERSION
-  spec.authors       = ["IIBUN Toshiyuki"]
-  spec.email         = ["toshiyuki.iibun@gmail.com"]
-  spec.summary       = "This plugin enables to ssh into vm using TeraTerm."
-  spec.description   = "This plugin enables to ssh into vm using TeraTerm."
-  spec.homepage      = ""
+  spec.name          = "vagrant-rlogin"
+  spec.version       = VagrantRLogin::VERSION
+  spec.authors       = ["Toshiyuki Goto"]
+  spec.email         = ["ngyuki.jp@gmail.com"]
+  spec.summary       = "This plugin enables to ssh into vm using RLogin."
+  spec.description   = "This plugin enables to ssh into vm using RLogin."
+  spec.homepage      = "https://github.com/ngyuki"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

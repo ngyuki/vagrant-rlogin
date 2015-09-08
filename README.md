@@ -1,6 +1,10 @@
-# Vagrant TeraTerm Plugin
+# Vagrant RLogin Plugin
 
-This is a Vagrant plugin that enables to ssh into vm with TeraTerm.
+This is a Vagrant plugin that enables to ssh into vm with RLogin.
+
+---
+
+TODO...
 
 ## Installation
 

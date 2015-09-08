@@ -1,15 +1,15 @@
-module VagrantTeraTerm
+module VagrantRLogin
   class Config < Vagrant.plugin(2, :config)
     # Program file absolute path or command name if found in PATH.
     # If value is undefined, search
-    #   ttermpro.exe
-    #   C:\Program Files (x86)\teraterm\ttermpro.exe
-    #   C:\Program Files\teraterm\ttermpro.exe
+    #   RLogin.exe
+    #   C:\Program Files (x86)\RLogin\RLogin.exe
+    #   C:\Program Files\RLogin\RLogin.exe
     #
     # @return [String]
     attr_accessor :exe_path
 
-    # TERATERM.INI file absolute path or relative path.
+    # RLogin.INI file absolute path or relative path.
     # Default is nil
     #
     # @return [String]
@@ -21,7 +21,7 @@ module VagrantTeraTerm
     # @return [String]
     attr_accessor :log_path
 
-    # TeraTerm macro file absolute path or relative path.
+    # RLogin macro file absolute path or relative path.
     # Default is nil
     #
     # @return [String]
