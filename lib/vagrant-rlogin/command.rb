@@ -29,33 +29,17 @@ module VagrantRLogin
         return -1 if !exe_path
 
         commands = [
-            "\"#{exe_path}\"",
-            "#{ssh_info[:host]}",
-            "#{ssh_info[:port]}",
+            exe_path,
             "/ssh",
-            "/2",
-            # skip host key verification
-            "/nosecuritywarning",
-            "/user=#{ssh_info[:username]}"
+            "/ip", ssh_info[:host],
+            "/port", ssh_info[:port],
+            "/user", ssh_info[:username],
+            "/inuse",
         ]
 
-
-        if ssh_info.include?(:password)
-          commands << "/passwd=#{ssh_info[:password]}"
-          commands << "/auth=password"
-        elsif ssh_info.include?(:private_key_path)
-          Array(ssh_info[:private_key_path]).each do |p|
-            commands << "/keyfile=#{File.expand_path(p)}"
-          end
-          commands << "/auth=publickey"
+        if not generate_rlogin_config(commands, vm)
+          return -1
         end
-
-        commands << "/ssh-A" if ssh_info[:forward_agent]
-        commands << "/ssh-X" if ssh_info[:forward_x11]
-        commands << "/f=\"#{absolute_winpath(vm, @config.ini_path)}\"" if not @config.ini_path.nil?
-        commands << "/L=\"#{absolute_winpath(vm, @config.log_path)}\"" if not @config.log_path.nil?
-        commands << "/M=\"#{absolute_winpath(vm, @config.macro_path)}\"" if not @config.macro_path.nil?
-        commands << @config.extra_args if not @config.extra_args.nil?
 
         @logger.debug(commands)
         do_process(commands)
@@ -93,6 +77,29 @@ module VagrantRLogin
       p = Pathname(path)
       return path.gsub(/\//, "\\") if p.absolute?
       return Pathname(vm.env.root_path).join(p).to_s.gsub(/\//, "\\")
+    end
+
+    def generate_rlogin_config(commands, vm)
+
+      src = @config.config_path
+      if src.nil?
+        @env.ui.error("config_path notfound in rlogin config")
+        nil
+      end
+
+      ssh_info = vm.ssh_info
+      content = File.read(src)
+
+      if ssh_info.include?(:password)
+        commands << "/pass" << ssh_info[:password]
+      elsif ssh_info.include?(:private_key_path)
+        key = vm.ssh_info[:private_key_path][0]
+        content.gsub!(/^Entry.IdKey=.*?$/, "Entry.IdKey=\"#{key}\";")
+      end
+
+      dst = File.join(vm.data_dir, "rlogin.rlg")
+      File.write(dst, content)
+      commands << dst
     end
 
     def do_process(commands)

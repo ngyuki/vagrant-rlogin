@@ -9,42 +9,19 @@ module VagrantRLogin
     # @return [String]
     attr_accessor :exe_path
 
-    # RLogin.INI file absolute path or relative path.
-    # Default is nil
+    # Template filename of the RLogin configuration file
     #
     # @return [String]
-    attr_accessor :ini_path
-
-    # Log file absolute path or relative path.
-    # Default is nil
-    #
-    # @return [String]
-    attr_accessor :log_path
-
-    # RLogin macro file absolute path or relative path.
-    # Default is nil
-    #
-    # @return [String]
-    attr_accessor :macro_path
-
-    # Extra arguments.
-    # Default is nil.
-    #
-    # @return [String]
-    attr_accessor :extra_args
+    attr_accessor :config_path
 
     def initialize
       @exe_path = UNSET_VALUE
-      @ini_path = UNSET_VALUE
-      @log_path = UNSET_VALUE
-      @extra_args = UNSET_VALUE
+      @config_path = UNSET_VALUE
     end
 
     def finalize!
       @exe_path = nil if @exe_path == UNSET_VALUE
-      @ini_path = nil if @ini_path == UNSET_VALUE
-      @log_path = nil if @log_path == UNSET_VALUE
-      @extra_args = nil if @extra_args == UNSET_VALUE
+      @config_path = nil if @config_path == UNSET_VALUE
     end
   end
 end
