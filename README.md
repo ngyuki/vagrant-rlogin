@@ -2,20 +2,16 @@
 
 This is a Vagrant plugin that enables to ssh into vm with RLogin.
 
----
-
-TODO...
-
 ## Installation
 
 ```
-vagrant plugin install vagrant-teraterm
+vagrant plugin install vagrant-rlogin
 ```
 
 ## Usage
 
 ```
-vagrant teraterm
+vagrant rlogin
 ```
 
 ## Configuration
@@ -23,38 +19,22 @@ vagrant teraterm
 ```ruby
 Vagrant.configure(2) do |config|
   # ...
-  config.teraterm.exe_path = 'C:\Program Files (x86)\teraterm\ttermpro.exe'
-  config.teraterm.ini_path = "teraterm.ini"
-  config.teraterm.log_path = "teraterm.log"
-  config.teraterm.macro_path = "macro.ttl"
-  config.teraterm.extra_args = "/ssh-v"
+  config.rlogin.exe_path = 'C:\Program Files (x86)\RLogin\RLogin.exe'
+  config.rlogin.config_path = 'C:\Users\username\.vagrant.d\rlogin.rlg'
   # ...
 end
 ```
 
-* ```exe_path``` A ttermpro.exe file path. We will find real path
+* ```exe_path``` A RLogin.exe file path. We will find real path
   * If set and executable, use it.
   * If set and not executable, search in PATH.
-  * If not set, search "ttermpro.exe" in PATH.
-  * If not found in PATH, use 'C:\Program Files (x86)\teraterm\ttermpro.exe'
- or 'C:\Program Files\teraterm\ttermpro.exe'
-* ```ini_path``` TERATERM.INI file absolute path or relative path from Vagrantfile dir.
-* ```log_path``` Log file absolute path or relative path from Vagrantfile dir.
-* ```macro_path``` TeraTerm macro file absolute path or relative path from Vagrantfile dir.
-* ```extra_args``` Extra arguments.
-
-
-
-
-## Contributing
-
-1. Fork it ( https://github.com/tiibun/vagrant-term/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+  * If not set, search "RLogin.exe" in PATH.
+  * If not found in PATH, use 'C:\Program Files (x86)\RLogin\RLogin.exe'
+ or 'C:\Program Files\RLogin\RLogin.exe'
+* ```config_path``` Template filename of the RLogin configuration file
 
 ## Thanks
 
 Vagrant ( https://github.com/https://github.com/mitchellh/vagrant )
 vagrant-multi-putty ( https://github.com/nickryand/vagrant-multi-putty )
+vagrant-teraterm ( https://github.com/tiibun/vagrant-teraterm )

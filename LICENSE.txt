@@ -1,4 +1,4 @@
-Copyright (c) 2015 IIBUN Toshiyuki
+Copyright (c) 2015 Toshiyuki Goto
 
 MIT License
 
